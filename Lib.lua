@@ -1,9 +1,9 @@
-local TweeningService = game:GetService("TweenService")
-local UserInputService = game:GetService("UserInputService")
-
 local Library = {}
 
 function Library:CreateWindow()
+	local TweeningService = game:GetService("TweenService")
+	local UserInputService = game:GetService("UserInputService")
+
 	local VirtualStudioCode = Instance.new("ScreenGui")
 	local TopBar = Instance.new("Frame")
 	local Minimize = Instance.new("ImageButton")
@@ -321,6 +321,7 @@ function Library:CreateWindow()
 				end
 			end
 		else
+			Dropdown.Rotation = 90
 			for _, DrpDwn in pairs(SideBar:GetChildren()) do
 				if DrpDwn ~= GameFolder and DrpDwn:IsA("TextButton") then
 					DrpDwn.Visible = true
@@ -452,7 +453,7 @@ function Library:CreateWindow()
 		Tittle.TextXAlignment = Enum.TextXAlignment.Left
 		
 		MainGameFolder.Name = "MainGameFolder"
-		MainGameFolder.Parent = game.ReplicatedFirst
+		MainGameFolder.Parent = MainBar
 		MainGameFolder.Active = true
 		MainGameFolder.AnchorPoint = Vector2.new(0.5, 0.5)
 		MainGameFolder.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
