@@ -554,6 +554,7 @@ function Library:CreateWindow()
 			Button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Button.TextScaled = true
 			Button.TextWrapped = true
+			Button.AutoButtonColor = true
 
 			Tittle.Name = "Tittle"
 			Tittle.Parent = Button
@@ -631,18 +632,6 @@ function Library:CreateWindow()
 			Type.MouseButton1Click:Connect(function() pcall(callback) end)
 			State.MouseButton1Click:Connect(function() pcall(callback) end)
 			
-			Button.MouseEnter:Connect(function()
-				if (Button.BackgroundTransparency ~= 0.5) then
-					TweenTransparency(.5, .1, Button)
-				end
-			end)
-			
-			Button.MouseLeave:Connect(function()
-				if (Button.BackgroundTransparency ~= 1) then
-					TweenTransparency(1, .1, Button)
-				end
-			end)
-			
 		end
 		
 		
@@ -672,7 +661,7 @@ function Library:CreateWindow()
 			Toggle.BorderSizePixel = 0
 			Toggle.Position = UDim2.new(0.484539419, 0, 0.04944003, 0)
 			Toggle.Size = UDim2.new(0.969079018, 0, 0.09888006, 0)
-			Toggle.AutoButtonColor = false
+			Toggle.AutoButtonColor = true
 			Toggle.Text = ""
 			Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Toggle.TextScaled = true
