@@ -720,7 +720,7 @@ function Library:CreateWindow()
 			State.Size = UDim2.new(0.173038229, 0, 1, 0)
 			State.AutoButtonColor = false
 			State.Font = Enum.Font.SourceSans
-			State.Text = enabled
+			State.Text = tostring(enabled)
 			State.TextColor3 = Color3.fromRGB(255, 255, 255)
 			State.TextScaled = true
 			State.TextSize = 15.000
