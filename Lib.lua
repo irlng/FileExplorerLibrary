@@ -1,24 +1,6 @@
 local TweeningService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
-local function TweenTransparency(endTransp, Time, Parent)
-	if endTransp and Parent then
-
-		local tweenInfo = TweenInfo.new(
-			Time,
-			Enum.EasingStyle.Linear,
-			Enum.EasingDirection.In,
-			0,
-			false,
-			0
-		)
-
-		local TweenTransp = TweeningService:Create(Parent, tweenInfo, {BackgroundTransparency = endTransp})
-		TweenTransp:Play()
-
-	end
-end
-
 local Library = {}
 
 function Library:CreateWindow()
@@ -298,6 +280,25 @@ function Library:CreateWindow()
 
 	UIAspectRatioConstraint_15.Parent = VirtualStudioCode
 	UIAspectRatioConstraint_15.AspectRatio = 1.562
+	
+
+	local function TweenTransparency(endTransp, Time, Parent)
+		if endTransp and Parent then
+
+			local tweenInfo = TweenInfo.new(
+				Time,
+				Enum.EasingStyle.Linear,
+				Enum.EasingDirection.In,
+				0,
+				false,
+				0
+			)
+
+			local TweenTransp = TweeningService:Create(Parent, tweenInfo, {BackgroundTransparency = endTransp})
+			TweenTransp:Play()
+
+		end
+	end
 	
 	GameFolder.MouseEnter:Connect(function()
 		if (GameFolder.BackgroundTransparency ~= .5) then
