@@ -741,7 +741,7 @@ function Library:CreateWindow()
 			
 			local function Fire()
 				enabled = not enabled
-				State.Text = enabled
+				State.Text = tostring(enabled)
 				pcall(callback, enabled)
 			end
 			
