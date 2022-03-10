@@ -699,9 +699,11 @@ function module.CreateWindow(LibName)
 			
 			local function ChangeActions(act)
 				if SelectedActions ~= nil and SelectedActions ~= act then
-
+					
+					print("Not Nill And Not Same")
 					for _, v in pairs(MainGameFolder:GetChildren()) do
 						if v:IsA("TextButton") and v ~= act then
+							print("Transp")
 							v.BackgroundTransparency = 1
 						end
 
@@ -709,6 +711,8 @@ function module.CreateWindow(LibName)
 					end
 
 				elseif SelectedActions == nil then
+					
+					print("Nill")
 					SelectedActions = act
 
 				end
@@ -726,13 +730,13 @@ function module.CreateWindow(LibName)
 			
 			Button.MouseEnter:Connect(function()
 				if (Button.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5,.5,Button)
+					TweenTransparency(.5, .5, Button)
 				end
 			end)
 			
 			Button.MouseLeave:Connect(function()
 				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
-					TweenTransparency(1,.5, Button)
+					TweenTransparency(1, .5, Button)
 				end
 			end)
 		end
@@ -847,8 +851,10 @@ function module.CreateWindow(LibName)
 			local function ChangeActions(act)
 				if SelectedActions ~= nil and SelectedActions ~= act then
 
+					print("Not Nill And Not Same")
 					for _, v in pairs(MainGameFolder:GetChildren()) do
 						if v:IsA("TextButton") and v ~= act then
+							print("Transp")
 							v.BackgroundTransparency = 1
 						end
 
@@ -856,7 +862,10 @@ function module.CreateWindow(LibName)
 					end
 
 				elseif SelectedActions == nil then
+
+					print("Nill")
 					SelectedActions = act
+
 				end
 			end
 			
@@ -874,13 +883,13 @@ function module.CreateWindow(LibName)
 			
 			Toggle.MouseEnter:Connect(function()
 				if (Toggle.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5,.5,Toggle)
+					TweenTransparency(.5, .5, Toggle)
 				end
 			end)
 			
 			Toggle.MouseLeave:Connect(function()
 				if (Toggle.BackgroundTransparency ~= 1) and (SelectedActions ~= Toggle) then
-					TweenTransparency(1,.5,Toggle)
+					TweenTransparency(1, .5, Toggle)
 				end
 			end)
 			
