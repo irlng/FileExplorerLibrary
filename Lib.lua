@@ -5,6 +5,9 @@ function module.CreateWindow(LibName)
 	local TweeningService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
 	
+	local SelectedFolder 
+	local SelectedActions	
+	
 	--Check if already exist
 	LibName = LibName or "Window"
 	for _, win in pairs(game.CoreGui:GetChildren()) do
@@ -497,6 +500,7 @@ function module.CreateWindow(LibName)
 		
 		Folder.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
+				SelectedFolder = Folder
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -513,13 +517,14 @@ function module.CreateWindow(LibName)
 		end)
 
 		Folder.MouseLeave:Connect(function()
-			if (Folder.BackgroundTransparency ~= 1) then
+			if (Folder.BackgroundTransparency ~= 1) and (SelectedFolder ~= Folder) then
 				TweenTransparency(1, .1, Folder)
 			end
 		end)
 
 		Icon.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
+				SelectedFolder = Folder
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -531,6 +536,7 @@ function module.CreateWindow(LibName)
 
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
+				SelectedFolder = Folder
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
