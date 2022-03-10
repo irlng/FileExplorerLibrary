@@ -412,6 +412,14 @@ function module.CreateWindow(LibName)
 	
 	
 	---------------------
+	local function ChangeSelected(parent)
+		if SelectedFolder == nil then SelectedFolder = parent return end
+		if SelectedFolder == parent then return end
+		SelectedFolder.BackgroundTransparency = 1.000
+		SelectedFolder = parent
+		
+	end
+	
 	local Folders = {}
 	
 	function Folders:NewFolders(FolName)
@@ -500,7 +508,7 @@ function module.CreateWindow(LibName)
 		
 		Folder.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				SelectedFolder = Folder
+				ChangeSelected(Folder)
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -524,7 +532,7 @@ function module.CreateWindow(LibName)
 
 		Icon.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				SelectedFolder = Folder
+				ChangeSelected(Folder)
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -536,7 +544,7 @@ function module.CreateWindow(LibName)
 
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				SelectedFolder = Folder
+				ChangeSelected(Folder)
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
