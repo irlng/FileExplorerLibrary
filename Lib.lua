@@ -469,12 +469,14 @@ function module.CreateWindow(LibName)
 	Profile_2.BorderSizePixel = 0
 	Profile_2.Position = UDim2.new(0.148544043, 0, 0.497254908, 0)
 	Profile_2.Size = UDim2.new(0.239035085, 0, 0.578431368, 0)
-	Profile_2.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
-	coroutine.wrap(function()
-		pcall(function()
-			Profile_2.Image = "https://www.roblox.com/asset-thumbnail/image?assetId=" .. game.PlaceId .. "&width=768&height=432&format=png"
-		end)
+	local succes, errormsg = pcall(function()
+		Profile_2.Image = "https://www.roblox.com/asset-thumbnail/image?assetId=" .. game.PlaceId .. "&width=768&height=432&format=png"
 	end)
+
+	if not succes then
+		warn(errormsg)
+	end
+
 
 	UIAspectRatioConstraint_8.Parent = Profile_2
 	UIAspectRatioConstraint_8.AspectRatio = 1.847
@@ -510,7 +512,7 @@ function module.CreateWindow(LibName)
 	GameID.Position = UDim2.new(0.32722804, 0, 0.563137352, 0)
 	GameID.Size = UDim2.new(0.22587721, 0, 0.176470578, 0)
 	GameID.Font = Enum.Font.SourceSansLight
-	GameID.Text = tostring(game.PlaceId)
+	GameID.Text = game.PlaceId
 	GameID.TextColor3 = Color3.fromRGB(255, 255, 255)
 	GameID.TextScaled = true
 	GameID.TextSize = 18.000
