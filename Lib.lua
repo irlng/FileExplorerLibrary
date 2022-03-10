@@ -700,10 +700,10 @@ function module.CreateWindow(LibName)
 			local function ChangeActions(act)
 				if SelectedActions ~= nil and SelectedActions ~= act then
 					
-					print("Not Nill And Not Same")
+
 					for _, v in pairs(MainGameFolder:GetChildren()) do
 						if v:IsA("TextButton") and v ~= act then
-							print("Transp")
+
 							v.BackgroundTransparency = 1
 						end
 
@@ -711,8 +711,6 @@ function module.CreateWindow(LibName)
 					end
 
 				elseif SelectedActions == nil then
-					
-					print("Nill")
 					SelectedActions = act
 
 				end
@@ -722,6 +720,7 @@ function module.CreateWindow(LibName)
 			local function DoItBu()
 				if SelectedActions == Button then
 					SelectedActions = nil
+					Button.BackgroundTransparency = 1
 					pcall(callback)
 				end
 				
@@ -856,10 +855,8 @@ function module.CreateWindow(LibName)
 			local function ChangeActions(act)
 				if SelectedActions ~= nil and SelectedActions ~= act then
 
-					print("Not Nill And Not Same")
 					for _, v in pairs(MainGameFolder:GetChildren()) do
 						if v:IsA("TextButton") and v ~= act then
-							print("Transp")
 							v.BackgroundTransparency = 1
 						end
 
@@ -867,8 +864,6 @@ function module.CreateWindow(LibName)
 					end
 
 				elseif SelectedActions == nil then
-
-					print("Nill")
 					SelectedActions = act
 
 				end
@@ -881,6 +876,7 @@ function module.CreateWindow(LibName)
 					Enabled = not Enabled
 					State.Text = tostring(Enabled)
 					SelectedActions = nil
+					Toggle.BackgroundTransparency = 1
 					pcall(callback, Enabled)
 				end
 				
