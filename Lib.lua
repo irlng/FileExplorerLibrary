@@ -519,23 +519,28 @@ function module.CreateWindow(LibName)
 		
 		--Script
 		
-		Folder.MouseButton1Click:Connect(function()
-			if MainGameFolder.Visible == false then
-				print(SelectedFolder)
-				if SelectedFolder ~= nil and SelectedFolder ~= Folder then
-
-					for _, v in pairs(SideBar:GetChildren()) do
-						if v:IsA("TextButton") and v ~= Folder then
-							v.BackgroundTransparency = 1
-						end
-
-						SelectedFolder = Folder
+		local function ChangeFolder(parent)
+			if SelectedFolder ~= nil and SelectedFolder ~= parent then
+				
+				for _, v in pairs(SideBar:GetChildren()) do
+					if v:IsA("TextButton") and v ~= parent then
+						v.BackgroundTransparency = 1
 					end
 
-				elseif SelectedFolder == nil then
-					SelectedFolder = Folder
-
+					SelectedFolder = parent
 				end
+				
+			elseif SelectedFolder == nil then
+				SelectedFolder = parent
+				
+			end
+		end
+		
+		Folder.MouseButton1Click:Connect(function()
+			if MainGameFolder.Visible == false then
+				
+				ChangeFolder(Folder)
+				
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -559,21 +564,9 @@ function module.CreateWindow(LibName)
 
 		Icon.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				print(SelectedFolder)
-				if SelectedFolder ~= nil and SelectedFolder ~= Folder then
 
-					for _, v in pairs(SideBar:GetChildren()) do
-						if v:IsA("TextButton") and v ~= Folder then
-							v.BackgroundTransparency = 1
-						end
-
-						SelectedFolder = Folder
-					end
-
-				elseif SelectedFolder == nil then
-					SelectedFolder = Folder
-
-				end
+				ChangeFolder(Folder)
+				
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -586,21 +579,8 @@ function module.CreateWindow(LibName)
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
 				MainGameFolder.Visible = true
-				print(SelectedFolder)
-				if SelectedFolder ~= nil and SelectedFolder ~= Folder then
-					
-					for _, v in pairs(SideBar:GetChildren()) do
-						if v:IsA("TextButton") and v ~= Folder then
-							v.BackgroundTransparency = 1
-						end
-						
-						SelectedFolder = Folder
-					end
-					
-				elseif SelectedFolder == nil then
-					SelectedFolder = Folder
-				
-				end
+
+				ChangeFolder(Folder)
 				
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -635,6 +615,7 @@ function module.CreateWindow(LibName)
 			Button.Parent = MainGameFolder
 			Button.AnchorPoint = Vector2.new(0.5, 0.5)
 			Button.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Button.BackgroundTransparency = 1.000
 			Button.BorderSizePixel = 0
 			Button.Position = UDim2.new(0.484539419, 0, 0.04944003, 0)
 			Button.Size = UDim2.new(0.969079018, 0, 0.09888006, 0)
@@ -716,13 +697,43 @@ function module.CreateWindow(LibName)
 			UIAspectRatioConstraint_4.Parent = Button
 			UIAspectRatioConstraint_4.AspectRatio = 22.591
 			
+			local function ChangeActions(act)
+				if SelectedActions ~= nil and SelectedActions ~= act then
+
+					for _, v in pairs(MainGameFolder:GetChildren()) do
+						if v:IsA("TextButton") and v ~= act then
+							v.BackgroundTransparency = 1
+						end
+
+						SelectedActions = act
+					end
+
+				elseif SelectedActions == nil then
+					SelectedActions = act
+
+				end
+			end
 			
-			Button.MouseButton1Click:Connect(function() pcall(callback) end)
-			Tittle.MouseButton1Click:Connect(function() pcall(callback) end)
-			Type.MouseButton1Click:Connect(function() pcall(callback) end)
-			State.MouseButton1Click:Connect(function() pcall(callback) end)
+			local function DoItBu()
+				ChangeActions(Button)
+				pcall(callback)
+			end
+			
+			Button.MouseButton1Click:Connect(function() DoItBu() end)
+			Tittle.MouseButton1Click:Connect(function() DoItBu() end)
+			Type.MouseButton1Click:Connect(function() DoItBu() end)
+			State.MouseButton1Click:Connect(function() DoItBu() end)
 			
 			Button.MouseEnter:Connect(function()
+				if (Button.BackgroundTransparency ~= .5) then
+					TweenTransparency(.5,.5,Button)
+				end
+			end)
+			
+			Button.MouseLeave:Connect(function()
+				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
+					TweenTransparency(1,.5, Button)
+				end
 			end)
 		end
 		
@@ -751,11 +762,13 @@ function module.CreateWindow(LibName)
 			Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
 			Toggle.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
 			Toggle.BorderSizePixel = 0
+			Toggle.BackgroundTransparency = 1.000
 			Toggle.Position = UDim2.new(0.484539419, 0, 0.04944003, 0)
 			Toggle.Size = UDim2.new(0.969079018, 0, 0.09888006, 0)
-			Toggle.AutoButtonColor = true
+			Toggle.AutoButtonColor = false
 			Toggle.Text = ""
 			Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Toggle.Selected = true
 			Toggle.TextScaled = true
 			Toggle.TextWrapped = true
 
@@ -830,10 +843,27 @@ function module.CreateWindow(LibName)
 
 			UIAspectRatioConstraint_4.Parent = Toggle
 			UIAspectRatioConstraint_4.AspectRatio = 22.591
+			
+			local function ChangeActions(act)
+				if SelectedActions ~= nil and SelectedActions ~= act then
 
+					for _, v in pairs(MainGameFolder:GetChildren()) do
+						if v:IsA("TextButton") and v ~= act then
+							v.BackgroundTransparency = 1
+						end
+
+						SelectedActions = act
+					end
+
+				elseif SelectedActions == nil then
+					SelectedActions = act
+				end
+			end
+			
 			local function Fire()
 				Enabled = not Enabled
 				State.Text = tostring(Enabled)
+				ChangeActions(Toggle)
 				pcall(callback, Enabled)
 			end
 
@@ -841,6 +871,18 @@ function module.CreateWindow(LibName)
 			Tittle.MouseButton1Click:Connect(Fire)
 			Type.MouseButton1Click:Connect(Fire)
 			State.MouseButton1Click:Connect(Fire)
+			
+			Toggle.MouseEnter:Connect(function()
+				if (Toggle.BackgroundTransparency ~= .5) then
+					TweenTransparency(.5,.5,Toggle)
+				end
+			end)
+			
+			Toggle.MouseLeave:Connect(function()
+				if (Toggle.BackgroundTransparency ~= 1) and (SelectedActions ~= Toggle) then
+					TweenTransparency(1,.5,Toggle)
+				end
+			end)
 			
 		end
 		
