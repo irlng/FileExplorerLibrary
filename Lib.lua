@@ -353,11 +353,8 @@ function module.CreateWindow(LibName)
 	Profile.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Profile.Position = UDim2.new(0.0942982435, 0, 0.5, 0)
 	Profile.Size = UDim2.new(0.131578952, 0, 0.588235319, 0)
-	Profile.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
-	coroutine.wrap(function()
-		local Content, IsReady = Players:GetUserThumbnailAsync(speaker.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
-		Profile.Image = Content
-	end)
+	local Content, IsReady = Players:GetUserThumbnailAsync(speaker.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+	Profile.Image = Content
 
 
 	UICorner.CornerRadius = UDim.new(1, 0)
@@ -491,7 +488,7 @@ function module.CreateWindow(LibName)
 	Name_2.Position = UDim2.new(0.292763174, 0, 0.318627447, 0)
 	Name_2.Size = UDim2.new(0.234649122, 0, 0.225490198, 0)
 	Name_2.Font = Enum.Font.SourceSansSemibold
-	Name_2.Text = tostring(game.Name)
+	Name_2.Text = game.Name
 	Name_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Name_2.TextScaled = true
 	Name_2.TextSize = 22.000
