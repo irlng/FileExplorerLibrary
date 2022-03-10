@@ -521,7 +521,21 @@ function module.CreateWindow(LibName)
 		
 		Folder.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				ChangeSelected(Folder)
+				print(SelectedFolder)
+				if SelectedFolder ~= nil and SelectedFolder ~= Folder then
+
+					for _, v in pairs(SideBar:GetChildren()) do
+						if v:IsA("TextButton") and v ~= Folder then
+							v.BackgroundTransparency = 1
+						end
+
+						SelectedFolder = Folder
+					end
+
+				elseif SelectedFolder == nil then
+					SelectedFolder = Folder
+
+				end
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -545,7 +559,21 @@ function module.CreateWindow(LibName)
 
 		Icon.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				ChangeSelected(Folder)
+				print(SelectedFolder)
+				if SelectedFolder ~= nil and SelectedFolder ~= Folder then
+
+					for _, v in pairs(SideBar:GetChildren()) do
+						if v:IsA("TextButton") and v ~= Folder then
+							v.BackgroundTransparency = 1
+						end
+
+						SelectedFolder = Folder
+					end
+
+				elseif SelectedFolder == nil then
+					SelectedFolder = Folder
+
+				end
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -558,7 +586,22 @@ function module.CreateWindow(LibName)
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
 				MainGameFolder.Visible = true
-				ChangeSelected(Folder)
+				print(SelectedFolder)
+				if SelectedFolder ~= nil and SelectedFolder ~= Folder then
+					
+					for _, v in pairs(SideBar:GetChildren()) do
+						if v:IsA("TextButton") and v ~= Folder then
+							v.BackgroundTransparency = 1
+						end
+						
+						SelectedFolder = Folder
+					end
+					
+				elseif SelectedFolder == nil then
+					SelectedFolder = Folder
+				
+				end
+				
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
 						v.Visible = false
