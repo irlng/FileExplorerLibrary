@@ -718,9 +718,17 @@ function module.CreateWindow(LibName)
 				end
 			end
 			
+			local Selected = false
+			
 			local function DoItBu()
-				ChangeActions(Button)
-				pcall(callback)
+				if Selected == false then
+					Selected = true
+					ChangeActions(Button)
+				else
+					Selected = false
+					SelectedActions = nil
+					pcall(callback)
+				end
 			end
 			
 			Button.MouseButton1Click:Connect(function() DoItBu() end)
@@ -869,11 +877,20 @@ function module.CreateWindow(LibName)
 				end
 			end
 			
+			local Selected = false
+			
 			local function Fire()
-				Enabled = not Enabled
-				State.Text = tostring(Enabled)
-				ChangeActions(Toggle)
-				pcall(callback, Enabled)
+				if Selected == false then
+					Selected = true
+					ChangeActions(Toggle)
+				else
+					Enabled = not Enabled
+					State.Text = tostring(Enabled)
+					SelectedActions = nil
+					Selected = false
+					pcall(callback, Enabled)
+				end
+
 			end
 
 			Toggle.MouseButton1Click:Connect(Fire)
