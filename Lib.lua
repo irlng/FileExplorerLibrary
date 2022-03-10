@@ -414,14 +414,16 @@ function module.CreateWindow(LibName)
 	---------------------
 	local function ChangeSelected(fol)
 		if SelectedFolder ~= nil then
-			
+			SelectedFolder = fol
+		elseif SelectedFolder ~= fol then
+		
 			for _, v in pairs(SideBar:GetChildren()) do
 				if v:IsA("TextButton") and v ~= fol then
 					v.BackgroundTransparency = 1.000
 					SelectedFolder = fol
 				end
 			end
-				
+			
 		end
 	end
 	
