@@ -614,11 +614,13 @@ function module.CreateWindow(LibName)
 
 	Minimize.MouseButton1Click:Connect(function()
 		for _, v in pairs(TopBar:GetChildren()) do
-			if v:IsA("Frame") then
+			if v:IsA("Frame") and v ~= GameBar then
 				if v.Visible == false then
 					v.Visible = true
+					GameBar.Visible = true
 				else
 					v.Visible = false
+					GameBar.Visible = false
 				end
 			end
 		end
@@ -977,7 +979,6 @@ function module.CreateWindow(LibName)
 			local function DoItBu()
 				if SelectedActions == Button then
 					SelectedActions = nil
-					Button.BackgroundTransparency = 1
 					pcall(callback)
 				end
 				
@@ -1133,7 +1134,6 @@ function module.CreateWindow(LibName)
 					Enabled = not Enabled
 					State.Text = tostring(Enabled)
 					SelectedActions = nil
-					Toggle.BackgroundTransparency = 1
 					pcall(callback, Enabled)
 				end
 				
