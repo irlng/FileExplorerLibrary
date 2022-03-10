@@ -793,6 +793,7 @@ function module.CreateWindow(LibName)
 				
 				ChangeFolder(Folder)
 				
+				GameBar.Visible = false
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -819,6 +820,7 @@ function module.CreateWindow(LibName)
 
 				ChangeFolder(Folder)
 				
+				GameBar.Visible = false
 				MainGameFolder.Visible = true
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
@@ -830,6 +832,7 @@ function module.CreateWindow(LibName)
 
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
+				GameBar.Visible = false
 				MainGameFolder.Visible = true
 
 				ChangeFolder(Folder)
