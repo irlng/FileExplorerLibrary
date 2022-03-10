@@ -511,7 +511,7 @@ function module.CreateWindow(LibName)
 		end)
 
 		Folder.MouseEnter:Connect(function()
-			if (Folder.BackgroundTransparency ~= 0.5) then
+			if (Folder.BackgroundTransparency ~= 0.5) and (SelectedFolder ~= Folder) then
 				TweenTransparency(.5, .1, Folder)
 			end
 		end)
