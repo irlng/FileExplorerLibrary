@@ -614,7 +614,7 @@ function module.CreateWindow(LibName)
 			Button.Name = "Button"
 			Button.Parent = MainGameFolder
 			Button.AnchorPoint = Vector2.new(0.5, 0.5)
-			Button.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Button.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
 			Button.BackgroundTransparency = 1.000
 			Button.BorderSizePixel = 0
 			Button.Position = UDim2.new(0.484539419, 0, 0.04944003, 0)
@@ -772,7 +772,7 @@ function module.CreateWindow(LibName)
 			Toggle.Name = "Toggle"
 			Toggle.Parent = MainGameFolder
 			Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
-			Toggle.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Toggle.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
 			Toggle.BorderSizePixel = 0
 			Toggle.BackgroundTransparency = 1.000
 			Toggle.Position = UDim2.new(0.484539419, 0, 0.04944003, 0)
