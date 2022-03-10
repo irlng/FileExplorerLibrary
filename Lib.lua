@@ -549,6 +549,23 @@ function module.CreateWindow(LibName)
 	
 	--Scripting
 	
+	local function ChangeFolder(parent)
+		if SelectedFolder ~= nil and SelectedFolder ~= parent then
+
+			for _, v in pairs(SideBar:GetChildren()) do
+				if v:IsA("TextButton") and v ~= parent then
+					v.BackgroundTransparency = 1
+				end
+
+				SelectedFolder = parent
+			end
+
+		elseif SelectedFolder == nil then
+			SelectedFolder = parent
+
+		end
+	end
+	
 	local function TweenTransparency(endTransp, Time, Parent)
 		if endTransp and Parent then
 
@@ -576,6 +593,18 @@ function module.CreateWindow(LibName)
 	GameFolder.MouseLeave:Connect(function()
 		if (GameFolder.BackgroundTransparency ~= 1) then
 			TweenTransparency(1, .1, GameFolder)
+		end
+	end)
+	
+	GameFolder.MouseButton1Click:Connect(function()
+		
+		ChangeFolder(GameFolder)
+		
+		GameBar.Visible = true
+		for _, v in pairs(MainBar:GetChildren()) do
+			if v:IsA("ScrollingFrame") then
+				v.Visible = false
+			end
 		end
 	end)
 
@@ -614,10 +643,11 @@ function module.CreateWindow(LibName)
 
 	Minimize.MouseButton1Click:Connect(function()
 		for _, v in pairs(TopBar:GetChildren()) do
+			local Nigga = GameBar.Visible
 			if v:IsA("Frame") and v ~= GameBar then
 				if v.Visible == false then
 					v.Visible = true
-					GameBar.Visible = true
+					GameBar.Visible = Nigga
 				else
 					v.Visible = false
 					GameBar.Visible = false
@@ -668,23 +698,6 @@ function module.CreateWindow(LibName)
 	
 	
 	---------------------
-	local function ChangeSelected(fol)
-		print("The hell?")
-		if SelectedFolder ~= nil then
-			SelectedFolder = fol
-			print("Okay")
-		elseif SelectedFolder ~= fol then
-		
-			for _, v in pairs(SideBar:GetChildren()) do
-				if v:IsA("TextButton") and v ~= fol then
-					v.BackgroundTransparency = 1.000
-					print("??")
-					SelectedFolder = fol
-				end
-			end
-			
-		end
-	end
 	
 	local Folders = {}
 	
@@ -775,22 +788,7 @@ function module.CreateWindow(LibName)
 		
 		--Script
 		
-		local function ChangeFolder(parent)
-			if SelectedFolder ~= nil and SelectedFolder ~= parent then
-				
-				for _, v in pairs(SideBar:GetChildren()) do
-					if v:IsA("TextButton") and v ~= parent then
-						v.BackgroundTransparency = 1
-					end
-
-					SelectedFolder = parent
-				end
-				
-			elseif SelectedFolder == nil then
-				SelectedFolder = parent
-				
-			end
-		end
+		
 		
 		Folder.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
