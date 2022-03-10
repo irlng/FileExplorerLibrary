@@ -718,17 +718,14 @@ function module.CreateWindow(LibName)
 				end
 			end
 			
-			local Selected = false
 			
 			local function DoItBu()
-				if Selected == false then
-					Selected = true
-					ChangeActions(Button)
-				else
-					Selected = false
+				if SelectedActions == Button then
 					SelectedActions = nil
 					pcall(callback)
 				end
+				
+				ChangeActions(Button)
 			end
 			
 			Button.MouseButton1Click:Connect(function() DoItBu() end)
@@ -738,53 +735,15 @@ function module.CreateWindow(LibName)
 			
 			Button.MouseEnter:Connect(function()
 				if (Button.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5, .5, Button)
+					TweenTransparency(.5, .1, Button)
 				end
 			end)
-			
-			Tittle.MouseEnter:Connect(function()
-				if (Button.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5, .5, Button)
-				end
-			end)
-			
-			Type.MouseEnter:Connect(function()
-				if (Button.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5, .5, Button)
-				end
-			end)
-			
-			State.MouseEnter:Connect(function()
-				if (Button.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5, .5, Button)
-				end
-			end)
-			
 			
 			Button.MouseLeave:Connect(function()
 				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
-					TweenTransparency(1, .5, Button)
+					TweenTransparency(1, .1, Button)
 				end
-			end)
-			
-			Tittle.MouseLeave:Connect(function()
-				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
-					TweenTransparency(1, .5, Button)
-				end
-			end)
-			
-			Type.MouseLeave:Connect(function()
-				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
-					TweenTransparency(1, .5, Button)
-				end
-			end)
-			
-			State.MouseLeave:Connect(function()
-				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
-					TweenTransparency(1, .5, Button)
-				end
-			end)
-			
+			end)			
 			
 		end
 		
@@ -915,7 +874,6 @@ function module.CreateWindow(LibName)
 				end
 			end
 			
-			local Selected = false
 			
 			local function Fire()
 
@@ -923,7 +881,6 @@ function module.CreateWindow(LibName)
 					Enabled = not Enabled
 					State.Text = tostring(Enabled)
 					SelectedActions = nil
-					Selected = false
 					pcall(callback, Enabled)
 				end
 				
@@ -937,13 +894,13 @@ function module.CreateWindow(LibName)
 			
 			Toggle.MouseEnter:Connect(function()
 				if (Toggle.BackgroundTransparency ~= .5) then
-					TweenTransparency(.5, .5, Toggle)
+					TweenTransparency(.5, .1, Toggle)
 				end
 			end)
 			
 			Toggle.MouseLeave:Connect(function()
 				if (Toggle.BackgroundTransparency ~= 1) and (SelectedActions ~= Toggle) then
-					TweenTransparency(1, .5, Toggle)
+					TweenTransparency(1, .1, Toggle)
 				end
 			end)
 			
