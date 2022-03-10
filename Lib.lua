@@ -4,6 +4,8 @@ function module.CreateWindow(LibName)
 	
 	local TweeningService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
+	local Players = game:GetService("Players")
+	local speaker = Players.LocalPlayer
 	
 	local SelectedFolder  = nil
 	local SelectedActions = nil
@@ -54,6 +56,37 @@ function module.CreateWindow(LibName)
 	local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
 	local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
 	local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
+	local GameBar = Instance.new("Frame")
+	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+	local UserInfo = Instance.new("Frame")
+	local Profile = Instance.new("ImageLabel")
+	local UICorner = Instance.new("UICorner")
+	local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+	local Name = Instance.new("TextLabel")
+	local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+	local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+	local UserID = Instance.new("TextLabel")
+	local ImageLabel = Instance.new("ImageButton")
+	local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+	local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+	local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+	local DisplayName = Instance.new("TextLabel")
+	local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+	local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+	local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+	local UserInfo_2 = Instance.new("Frame")
+	local Profile_2 = Instance.new("ImageLabel")
+	local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
+	local Name_2 = Instance.new("TextLabel")
+	local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+	local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
+	local GameID = Instance.new("TextLabel")
+	local ImageLabel_2 = Instance.new("ImageButton")
+	local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
+	local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
+	local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
+	local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
+
 	
 	VirtualStudioCode.Name = LibName
 	VirtualStudioCode.Parent = game:GetService("CoreGui")
@@ -294,6 +327,227 @@ function module.CreateWindow(LibName)
 	UIAspectRatioConstraint_15.Parent = VirtualStudioCode
 	UIAspectRatioConstraint_15.AspectRatio = 1.562
 	
+	GameBar.Name = "GameBar"
+	GameBar.Parent = TopBar
+	GameBar.AnchorPoint = Vector2.new(0.5, 0.5)
+	GameBar.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	GameBar.BorderSizePixel = 0
+	GameBar.Position = UDim2.new(0.612537801, 0, 8.14285755, 0)
+	GameBar.Size = UDim2.new(0.774924517, 0, 12.1428566, 0)
+
+	UIAspectRatioConstraint.Parent = GameBar
+	UIAspectRatioConstraint.AspectRatio = 1.509
+
+	UserInfo.Name = "UserInfo"
+	UserInfo.Parent = GameBar
+	UserInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+	UserInfo.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	UserInfo.BackgroundTransparency = 0.200
+	UserInfo.BorderSizePixel = 0
+	UserInfo.Position = UDim2.new(0.499025345, 0, 0.214705884, 0)
+	UserInfo.Size = UDim2.new(0.888888896, 0, 0.300000012, 0)
+
+	Profile.Name = "Profile"
+	Profile.Parent = UserInfo
+	Profile.AnchorPoint = Vector2.new(0.5, 0.5)
+	Profile.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Profile.Position = UDim2.new(0.0942982435, 0, 0.5, 0)
+	Profile.Size = UDim2.new(0.131578952, 0, 0.588235319, 0)
+	Profile.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+	coroutine.wrap(function()
+		local Content, IsReady = Players:GetUserThumbnailAsync(speaker.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+		Profile.Image = Content
+	end)
+
+
+	UICorner.CornerRadius = UDim.new(1, 0)
+	UICorner.Parent = Profile
+
+	UIAspectRatioConstraint_2.Parent = Profile
+	UIAspectRatioConstraint_2.AspectRatio = 1.000
+
+	Name.Name = "Name"
+	Name.Parent = UserInfo
+	Name.AnchorPoint = Vector2.new(0, 0.5)
+	Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name.BackgroundTransparency = 1.000
+	Name.BorderSizePixel = 0
+	Name.Position = UDim2.new(0.185307011, 0, 0.318627447, 0)
+	Name.Size = UDim2.new(0.234649122, 0, 0.225490198, 0)
+	Name.Font = Enum.Font.SourceSansSemibold
+	Name.Text = tostring(speaker.Name)
+	Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name.TextScaled = true
+	Name.TextSize = 22.000
+	Name.TextWrapped = true
+	Name.TextXAlignment = Enum.TextXAlignment.Left
+
+	UITextSizeConstraint.Parent = Name
+	UITextSizeConstraint.MaxTextSize = 22
+
+	UIAspectRatioConstraint_3.Parent = Name
+	UIAspectRatioConstraint_3.AspectRatio = 4.652
+
+	UserID.Name = "UserID"
+	UserID.Parent = UserInfo
+	UserID.AnchorPoint = Vector2.new(0, 0.5)
+	UserID.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	UserID.BackgroundTransparency = 1.000
+	UserID.BorderSizePixel = 0
+	UserID.Position = UDim2.new(0.222000003, 0, 0.720000029, 0)
+	UserID.Size = UDim2.new(0.22587721, 0, 0.176470578, 0)
+	UserID.Font = Enum.Font.SourceSansLight
+	UserID.Text = tostring(speaker.UserId)
+	UserID.TextColor3 = Color3.fromRGB(255, 255, 255)
+	UserID.TextScaled = true
+	UserID.TextSize = 18.000
+	UserID.TextWrapped = true
+	UserID.TextXAlignment = Enum.TextXAlignment.Left
+
+	ImageLabel.Name = "ImageLabel"
+	ImageLabel.Parent = UserID
+	ImageLabel.BackgroundTransparency = 1.000
+	ImageLabel.BorderSizePixel = 0
+	ImageLabel.Position = UDim2.new(-0.153846174, 0, 0.133333325, 0)
+	ImageLabel.Selectable = false
+	ImageLabel.Size = UDim2.new(0.134615391, 0, 0.770299196, 0)
+	ImageLabel.AutoButtonColor = false
+	ImageLabel.Image = "http://www.roblox.com/asset/?id=6035053278"
+	ImageLabel.MouseButton1Click:Connect(function()
+		if (setclipboard) then
+			setclipboard(tostring(speaker.UserId))
+		else
+			warn("Your exploit doesn't support [setclipboard].")
+		end
+	end)
+
+	UIAspectRatioConstraint_4.Parent = ImageLabel
+
+	UIAspectRatioConstraint_5.Parent = UserID
+	UIAspectRatioConstraint_5.AspectRatio = 5.722
+
+	UITextSizeConstraint_2.Parent = UserID
+	UITextSizeConstraint_2.MaxTextSize = 18
+
+	DisplayName.Name = "DisplayName"
+	DisplayName.Parent = UserInfo
+	DisplayName.AnchorPoint = Vector2.new(0, 0.5)
+	DisplayName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	DisplayName.BackgroundTransparency = 1.000
+	DisplayName.BorderSizePixel = 0
+	DisplayName.Position = UDim2.new(0.1875, 0, 0.495098054, 0)
+	DisplayName.Size = UDim2.new(0.234649122, 0, 0.225490198, 0)
+	DisplayName.Font = Enum.Font.SourceSans
+	DisplayName.Text = tostring(speaker.DisplayName)
+	DisplayName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	DisplayName.TextScaled = true
+	DisplayName.TextSize = 17.000
+	DisplayName.TextTransparency = 0.200
+	DisplayName.TextWrapped = true
+	DisplayName.TextXAlignment = Enum.TextXAlignment.Left
+
+	UITextSizeConstraint_3.Parent = DisplayName
+	UITextSizeConstraint_3.MaxTextSize = 17
+
+	UIAspectRatioConstraint_6.Parent = DisplayName
+	UIAspectRatioConstraint_6.AspectRatio = 4.652
+
+	UIAspectRatioConstraint_7.Parent = UserInfo
+	UIAspectRatioConstraint_7.AspectRatio = 4.471
+
+	UserInfo_2.Name = "GameInfo"
+	UserInfo_2.Parent = GameBar
+	UserInfo_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	UserInfo_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	UserInfo_2.BackgroundTransparency = 0.200
+	UserInfo_2.BorderSizePixel = 0
+	UserInfo_2.Position = UDim2.new(0.499025345, 0, 0.561764717, 0)
+	UserInfo_2.Size = UDim2.new(0.888888896, 0, 0.300000012, 0)
+
+	Profile_2.Name = "Profile"
+	Profile_2.Parent = UserInfo_2
+	Profile_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	Profile_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Profile_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Profile_2.BorderSizePixel = 0
+	Profile_2.Position = UDim2.new(0.148544043, 0, 0.497254908, 0)
+	Profile_2.Size = UDim2.new(0.239035085, 0, 0.578431368, 0)
+	Profile_2.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+	coroutine.wrap(function()
+		pcall(function()
+			Profile_2.Image = "https://www.roblox.com/asset-thumbnail/image?assetId=" .. game.PlaceId .. "&width=768&height=432&format=png"
+		end)
+	end)
+
+	UIAspectRatioConstraint_8.Parent = Profile_2
+	UIAspectRatioConstraint_8.AspectRatio = 1.847
+
+	Name_2.Name = "Name"
+	Name_2.Parent = UserInfo_2
+	Name_2.AnchorPoint = Vector2.new(0, 0.5)
+	Name_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_2.BackgroundTransparency = 1.000
+	Name_2.BorderSizePixel = 0
+	Name_2.Position = UDim2.new(0.292763174, 0, 0.318627447, 0)
+	Name_2.Size = UDim2.new(0.234649122, 0, 0.225490198, 0)
+	Name_2.Font = Enum.Font.SourceSansSemibold
+	Name_2.Text = tostring(game.Name)
+	Name_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_2.TextScaled = true
+	Name_2.TextSize = 22.000
+	Name_2.TextWrapped = true
+	Name_2.TextXAlignment = Enum.TextXAlignment.Left
+
+	UITextSizeConstraint_4.Parent = Name_2
+	UITextSizeConstraint_4.MaxTextSize = 22
+
+	UIAspectRatioConstraint_9.Parent = Name_2
+	UIAspectRatioConstraint_9.AspectRatio = 4.652
+
+	GameID.Name = "GameID"
+	GameID.Parent = UserInfo_2
+	GameID.AnchorPoint = Vector2.new(0, 0.5)
+	GameID.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GameID.BackgroundTransparency = 1.000
+	GameID.BorderSizePixel = 0
+	GameID.Position = UDim2.new(0.32722804, 0, 0.563137352, 0)
+	GameID.Size = UDim2.new(0.22587721, 0, 0.176470578, 0)
+	GameID.Font = Enum.Font.SourceSansLight
+	GameID.Text = tostring(game.PlaceId)
+	GameID.TextColor3 = Color3.fromRGB(255, 255, 255)
+	GameID.TextScaled = true
+	GameID.TextSize = 18.000
+	GameID.TextWrapped = true
+	GameID.TextXAlignment = Enum.TextXAlignment.Left
+
+	ImageLabel_2.Name = "ImageLabel"
+	ImageLabel_2.Parent = GameID
+	ImageLabel_2.BackgroundTransparency = 1.000
+	ImageLabel_2.BorderSizePixel = 0
+	ImageLabel_2.Position = UDim2.new(-0.153752834, 0, 0.111111104, 0)
+	ImageLabel_2.Selectable = false
+	ImageLabel_2.Size = UDim2.new(0.134615391, 0, 1.39999998, 0)
+	ImageLabel_2.AutoButtonColor = false
+	ImageLabel_2.Image = "http://www.roblox.com/asset/?id=6035053278"
+	ImageLabel_2.MouseButton1Click:Connect(function()
+		if (setclipboard) then
+			setclipboard(tostring(game.PlaceId))
+		else
+			warn("Your exploit doesn't support [setclipboard].")
+		end
+	end)
+
+	UIAspectRatioConstraint_10.Parent = ImageLabel_2
+
+	UIAspectRatioConstraint_11.Parent = GameID
+	UIAspectRatioConstraint_11.AspectRatio = 5.722
+
+	UITextSizeConstraint_5.Parent = GameID
+	UITextSizeConstraint_5.MaxTextSize = 18
+
+	UIAspectRatioConstraint_12.Parent = UserInfo_2
+	UIAspectRatioConstraint_12.AspectRatio = 4.471
+	
 	--Scripting
 	
 	local function TweenTransparency(endTransp, Time, Parent)
@@ -409,6 +663,7 @@ function module.CreateWindow(LibName)
 			update(input)
 		end
 	end)
+	
 	
 	
 	---------------------
