@@ -624,7 +624,7 @@ function module.CreateWindow(LibName)
 			Button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Button.TextScaled = true
 			Button.TextWrapped = true
-			Button.AutoButtonColor = true
+			Button.AutoButtonColor = false
 
 			Tittle.Name = "Tittle"
 			Tittle.Parent = Button
@@ -742,11 +742,50 @@ function module.CreateWindow(LibName)
 				end
 			end)
 			
+			Tittle.MouseEnter:Connect(function()
+				if (Button.BackgroundTransparency ~= .5) then
+					TweenTransparency(.5, .5, Button)
+				end
+			end)
+			
+			Type.MouseEnter:Connect(function()
+				if (Button.BackgroundTransparency ~= .5) then
+					TweenTransparency(.5, .5, Button)
+				end
+			end)
+			
+			State.MouseEnter:Connect(function()
+				if (Button.BackgroundTransparency ~= .5) then
+					TweenTransparency(.5, .5, Button)
+				end
+			end)
+			
+			
 			Button.MouseLeave:Connect(function()
 				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
 					TweenTransparency(1, .5, Button)
 				end
 			end)
+			
+			Tittle.MouseLeave:Connect(function()
+				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
+					TweenTransparency(1, .5, Button)
+				end
+			end)
+			
+			Type.MouseLeave:Connect(function()
+				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
+					TweenTransparency(1, .5, Button)
+				end
+			end)
+			
+			State.MouseLeave:Connect(function()
+				if (Button.BackgroundTransparency ~= 1) and (SelectedActions ~= Button) then
+					TweenTransparency(1, .5, Button)
+				end
+			end)
+			
+			
 		end
 		
 		
@@ -780,7 +819,6 @@ function module.CreateWindow(LibName)
 			Toggle.AutoButtonColor = false
 			Toggle.Text = ""
 			Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Toggle.Selected = true
 			Toggle.TextScaled = true
 			Toggle.TextWrapped = true
 
@@ -880,17 +918,16 @@ function module.CreateWindow(LibName)
 			local Selected = false
 			
 			local function Fire()
-				if Selected == false then
-					Selected = true
-					ChangeActions(Toggle)
-				else
+
+				if SelectedActions == Toggle then
 					Enabled = not Enabled
 					State.Text = tostring(Enabled)
 					SelectedActions = nil
 					Selected = false
 					pcall(callback, Enabled)
 				end
-
+				
+				ChangeActions(Toggle)
 			end
 
 			Toggle.MouseButton1Click:Connect(Fire)
