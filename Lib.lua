@@ -412,20 +412,17 @@ function module.CreateWindow(LibName)
 	
 	
 	---------------------
-	local function ChangeSelected(parent)
-		if SelectedFolder == nil then
-			SelectedFolder = parent
-			print("au3")
-		else
-			if SelectedFolder ~= parent then
-				SelectedFolder.BackgroundTransparency = 1.000
-				SelectedFolder = parent
-				print("au")
-			else
-				print("au1")
+	local function ChangeSelected(fol)
+		if SelectedFolder ~= nil then
+			
+			for _, v in pairs(SideBar:GetChildren()) do
+				if v:IsA("TextButton") and v ~= fol then
+					v.BackgroundTransparency = 1.000
+					SelectedFolder = fol
+				end
 			end
+				
 		end
-		
 	end
 	
 	local Folders = {}
@@ -530,7 +527,7 @@ function module.CreateWindow(LibName)
 		end)
 
 		Folder.MouseEnter:Connect(function()
-			if (Folder.BackgroundTransparency ~= 0.5) and (SelectedFolder ~= Folder) then
+			if (Folder.BackgroundTransparency ~= 0.5) then
 				TweenTransparency(.5, .1, Folder)
 			end
 		end)
@@ -555,8 +552,8 @@ function module.CreateWindow(LibName)
 
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
-				ChangeSelected(Folder)
 				MainGameFolder.Visible = true
+				ChangeSelected(Folder)
 				for _, v in pairs(MainBar:GetChildren()) do
 					if v ~= MainGameFolder and v:IsA("ScrollingFrame") then
 						v.Visible = false
