@@ -413,10 +413,17 @@ function module.CreateWindow(LibName)
 	
 	---------------------
 	local function ChangeSelected(parent)
-		if SelectedFolder == nil then SelectedFolder = parent return end
-		if SelectedFolder == parent then return end
-		SelectedFolder.BackgroundTransparency = 1.000
-		SelectedFolder = parent
+		if SelectedFolder == nil then
+			SelectedFolder = parent
+			print("au3")
+		else
+			if SelectedFolder ~= parent then
+				SelectedFolder.BackgroundTransparency = 1.000
+				print("au")
+			else
+				print("au1")
+			end
+		end
 		
 	end
 	
@@ -438,6 +445,7 @@ function module.CreateWindow(LibName)
 		
 		Folder.Name = "Folder"
 		Folder.Parent = SideBar
+		Folder.AutoButtonColor = false
 		Folder.BackgroundTransparency = 1.000
 		Folder.BorderSizePixel = 0
 		Folder.Position = UDim2.new(3.31543612, 0, -0.31764707, 0)
@@ -450,6 +458,7 @@ function module.CreateWindow(LibName)
 
 		Icon.Name = "Icon"
 		Icon.Parent = Folder
+		Icon.AutoButtonColor = false	
 		Icon.AnchorPoint = Vector2.new(0.5, 0.5)
 		Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Icon.BackgroundTransparency = 1.000
@@ -463,6 +472,7 @@ function module.CreateWindow(LibName)
 
 		Tittle.Name = "Tittle"
 		Tittle.Parent = Folder
+		Tittle.AutoButtonColor = false
 		Tittle.AnchorPoint = Vector2.new(0.5, 0.5)
 		Tittle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Tittle.BackgroundTransparency = 1.000
