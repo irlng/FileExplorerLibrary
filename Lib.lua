@@ -5,8 +5,8 @@ function module.CreateWindow(LibName)
 	local TweeningService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
 	
-	local SelectedFolder 
-	local SelectedActions	
+	local SelectedFolder  = nil
+	local SelectedActions = nil
 	
 	--Check if already exist
 	LibName = LibName or "Window"
@@ -413,6 +413,7 @@ function module.CreateWindow(LibName)
 	
 	---------------------
 	local function ChangeSelected(fol)
+		print("The hell?")
 		if SelectedFolder ~= nil then
 			SelectedFolder = fol
 			print("Okay")
