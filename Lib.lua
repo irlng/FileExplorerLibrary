@@ -419,6 +419,7 @@ function module.CreateWindow(LibName)
 		else
 			if SelectedFolder ~= parent then
 				SelectedFolder.BackgroundTransparency = 1.000
+				SelectedFolder = parent
 				print("au")
 			else
 				print("au1")
