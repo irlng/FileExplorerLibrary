@@ -1,9 +1,19 @@
-local Library = {}
+local module = {}
 
-function Library:CreateWindow()
+function module.CreateWindow(LibName)
+	
 	local TweeningService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
-
+	
+	--Check if already exist
+	LibName = LibName or "Window"
+	for _, win in pairs(game.CoreGui:GetChildren()) do
+		if win:IsA("ScreenGui") and win.Name == LibName then
+			win:Destroy()
+		end
+	end
+	
+	--Create Window
 	local VirtualStudioCode = Instance.new("ScreenGui")
 	local TopBar = Instance.new("Frame")
 	local Minimize = Instance.new("ImageButton")
@@ -42,7 +52,7 @@ function Library:CreateWindow()
 	local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
 	local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 	
-	VirtualStudioCode.Name = "VirtualStudioCode"
+	VirtualStudioCode.Name = LibName
 	VirtualStudioCode.Parent = game:GetService("CoreGui")
 	VirtualStudioCode.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	VirtualStudioCode.ResetOnSpawn = false
@@ -281,7 +291,8 @@ function Library:CreateWindow()
 	UIAspectRatioConstraint_15.Parent = VirtualStudioCode
 	UIAspectRatioConstraint_15.AspectRatio = 1.562
 	
-
+	--Scripting
+	
 	local function TweenTransparency(endTransp, Time, Parent)
 		if endTransp and Parent then
 
@@ -311,7 +322,7 @@ function Library:CreateWindow()
 			TweenTransparency(1, .1, GameFolder)
 		end
 	end)
-	
+
 	Dropdown.MouseButton1Click:Connect(function()
 		if Dropdown.Rotation == 90 then
 			Dropdown.Rotation = 0
@@ -329,22 +340,22 @@ function Library:CreateWindow()
 			end
 		end
 	end)
-	
+
 	Dropdown.MouseEnter:Connect(function() Dropdown.ImageColor3 = Color3.fromRGB(5, 222, 255) end)
 	Dropdown.MouseLeave:Connect(function() Dropdown.ImageColor3 = Color3.fromRGB(255, 255, 255) end)
-	
+
 	Minimize.MouseEnter:Connect(function()
 		if (Minimize.BackgroundTransparency ~= .5) then
 			TweenTransparency(.5, .1, Minimize)
 		end
 	end)
-	
+
 	Minimize.MouseLeave:Connect(function()
 		if (Minimize.BackgroundTransparency ~= 1) then
 			TweenTransparency(1, .1, Minimize)
 		end
 	end)
-	
+
 	Minimize.MouseButton1Click:Connect(function()
 		for _, v in pairs(TopBar:GetChildren()) do
 			if v:IsA("Frame") then
@@ -356,12 +367,12 @@ function Library:CreateWindow()
 			end
 		end
 	end)
-	
+
 	local dragging
 	local dragInput
 	local dragStart
 	local startPos
-	
+
 	local function update(input)
 		local delta = input.Position - dragStart
 		local dragTime = 0.04
@@ -370,7 +381,7 @@ function Library:CreateWindow()
 		local dragSmoothFunction = TweeningService:Create(TopBar, TweenInfo.new(dragTime, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), SmoothDrag)
 		dragSmoothFunction:Play()
 	end
-	
+
 	TopBar.InputBegan:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
@@ -383,13 +394,13 @@ function Library:CreateWindow()
 			end)
 		end
 	end)
-	
+
 	TopBar.InputChanged:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 			dragInput = input
 		end
 	end)
-	
+
 	UserInputService.InputChanged:Connect(function(input)
 		if input == dragInput and dragging and TopBar.Size then
 			update(input)
@@ -397,9 +408,12 @@ function Library:CreateWindow()
 	end)
 	
 	
-	local Library2 = {}
+	---------------------
+	local Folders = {}
 	
-	function Library2:CreateFolder(name)
+	function Folders:NewFolders(FolName)
+		FolName = FolName or "Folder"
+		
 		local Folder = Instance.new("TextButton")
 		local Icon = Instance.new("ImageButton")
 		local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
@@ -407,7 +421,7 @@ function Library:CreateWindow()
 		local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 		local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 		local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
-		
+
 		local MainGameFolder = Instance.new("ScrollingFrame")
 		local UIListLayout = Instance.new("UIListLayout")
 		
@@ -445,13 +459,13 @@ function Library:CreateWindow()
 		Tittle.Position = UDim2.new(0.701342285, 0, 0.499999911, 0)
 		Tittle.Size = UDim2.new(0.597315431, 0, 0.999999821, 0)
 		Tittle.Font = Enum.Font.SourceSans
-		Tittle.Text = name
+		Tittle.Text = FolName
 		Tittle.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Tittle.TextScaled = true
 		Tittle.TextSize = 17.000
 		Tittle.TextWrapped = true
 		Tittle.TextXAlignment = Enum.TextXAlignment.Left
-		
+
 		MainGameFolder.Name = "MainGameFolder"
 		MainGameFolder.Parent = MainBar
 		MainGameFolder.Active = true
@@ -465,10 +479,10 @@ function Library:CreateWindow()
 		MainGameFolder.MidImage = ""
 		MainGameFolder.TopImage = ""
 		MainGameFolder.Visible = false
-		
+
 		UIListLayout.Parent = MainGameFolder
 		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-		
+
 
 		UITextSizeConstraint.Parent = Tittle
 		UITextSizeConstraint.MaxTextSize = 17
@@ -478,6 +492,8 @@ function Library:CreateWindow()
 
 		UIAspectRatioConstraint_3.Parent = Folder
 		UIAspectRatioConstraint_3.AspectRatio = 6.208
+		
+		--Script
 		
 		Folder.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
@@ -489,19 +505,19 @@ function Library:CreateWindow()
 				end
 			end
 		end)
-		
+
 		Folder.MouseEnter:Connect(function()
 			if (Folder.BackgroundTransparency ~= 0.5) then
 				TweenTransparency(.5, .1, Folder)
 			end
 		end)
-		
+
 		Folder.MouseLeave:Connect(function()
 			if (Folder.BackgroundTransparency ~= 1) then
 				TweenTransparency(1, .1, Folder)
 			end
 		end)
-		
+
 		Icon.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
 				MainGameFolder.Visible = true
@@ -512,7 +528,7 @@ function Library:CreateWindow()
 				end
 			end
 		end)
-		
+
 		Tittle.MouseButton1Click:Connect(function()
 			if MainGameFolder.Visible == false then
 				MainGameFolder.Visible = true
@@ -524,10 +540,13 @@ function Library:CreateWindow()
 			end
 		end)
 		
-		local Library3 = {}
+		------------------
 		
-		function Library3:CreateButton(name, callback)
-			local callback = callback or function() end
+		local Actions = {}
+		
+		function Actions:NewButton(ButtoName, callback)
+			callback = callback or function() end
+			ButtoName = ButtoName or "Button"
 			
 			local Button = Instance.new("TextButton")
 			local Tittle = Instance.new("TextButton")
@@ -541,7 +560,7 @@ function Library:CreateWindow()
 			local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 			local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 			local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-			
+
 			Button.Name = "Button"
 			Button.Parent = MainGameFolder
 			Button.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -565,7 +584,7 @@ function Library:CreateWindow()
 			Tittle.Size = UDim2.new(0.400402427, 0, 1, 0)
 			Tittle.AutoButtonColor = false
 			Tittle.Font = Enum.Font.SourceSans
-			Tittle.Text = name
+			Tittle.Text = ButtoName
 			Tittle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Tittle.TextScaled = true
 			Tittle.TextSize = 15.000
@@ -627,19 +646,22 @@ function Library:CreateWindow()
 			UIAspectRatioConstraint_4.Parent = Button
 			UIAspectRatioConstraint_4.AspectRatio = 22.591
 			
+			
 			Button.MouseButton1Click:Connect(function() pcall(callback) end)
 			Tittle.MouseButton1Click:Connect(function() pcall(callback) end)
 			Type.MouseButton1Click:Connect(function() pcall(callback) end)
 			State.MouseButton1Click:Connect(function() pcall(callback) end)
 			
+			Button.MouseEnter:Connect(function()
+			end)
 		end
 		
 		
-		function Library3:CreateToggle(name, default, callback)
+		function Actions:NewToggle(TogName, Default, callback)
+			callback = callback or function() end
+			TogName = TogName or "Toggle"
 			
-			local callback = callback or function() end
-			
-			local enabled = default
+			local Enabled = Default
 			
 			local Toggle = Instance.new("TextButton")
 			local Tittle = Instance.new("TextButton")
@@ -653,7 +675,7 @@ function Library:CreateWindow()
 			local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 			local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 			local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-			
+
 			Toggle.Name = "Toggle"
 			Toggle.Parent = MainGameFolder
 			Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -676,7 +698,7 @@ function Library:CreateWindow()
 			Tittle.Size = UDim2.new(0.400402427, 0, 1, 0)
 			Tittle.AutoButtonColor = false
 			Tittle.Font = Enum.Font.SourceSans
-			Tittle.Text = name
+			Tittle.Text = TogName
 			Tittle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Tittle.TextScaled = true
 			Tittle.TextSize = 15.000
@@ -720,7 +742,7 @@ function Library:CreateWindow()
 			State.Size = UDim2.new(0.173038229, 0, 1, 0)
 			State.AutoButtonColor = false
 			State.Font = Enum.Font.SourceSans
-			State.Text = tostring(enabled)
+			State.Text = tostring(Enabled)
 			State.TextColor3 = Color3.fromRGB(255, 255, 255)
 			State.TextScaled = true
 			State.TextSize = 15.000
@@ -738,13 +760,13 @@ function Library:CreateWindow()
 
 			UIAspectRatioConstraint_4.Parent = Toggle
 			UIAspectRatioConstraint_4.AspectRatio = 22.591
-			
+
 			local function Fire()
-				enabled = not enabled
-				State.Text = tostring(enabled)
-				pcall(callback, enabled)
+				Enabled = not Enabled
+				State.Text = tostring(Enabled)
+				pcall(callback, Enabled)
 			end
-			
+
 			Toggle.MouseButton1Click:Connect(Fire)
 			Tittle.MouseButton1Click:Connect(Fire)
 			Type.MouseButton1Click:Connect(Fire)
@@ -752,13 +774,12 @@ function Library:CreateWindow()
 			
 		end
 		
-		return Library3
+		return Actions
 		
 	end
 	
-	return Library2
-	
+	return Folders
 	
 end
 
-return Library
+return module
