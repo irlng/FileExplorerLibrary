@@ -1008,7 +1008,7 @@ function module.CreateWindow(LibName)
 					SelectedActions = nil
 					local Succes, Messgae = pcall(callback)
 					
-					if Messgae ~= nil then
+					if not Succes and Messgae ~= nil then
 						warn(Messgae)
 					end
 				end
@@ -1167,7 +1167,7 @@ function module.CreateWindow(LibName)
 					SelectedActions = nil
 					local Succes, Messgae = pcall(callback)
 
-					if Messgae ~= nil then
+					if not Succes and Messgae ~= nil then
 						warn(Messgae)
 					end
 				end
