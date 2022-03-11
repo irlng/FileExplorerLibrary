@@ -629,7 +629,6 @@ function module.CreateWindow(LibName)
 			end
 		end
 	end)
-	
 
 	Dropdown.MouseButton1Click:Connect(function()
 		if Dropdown.Rotation == 90 then
@@ -669,9 +668,11 @@ function module.CreateWindow(LibName)
 			local Nigga = GameBar.Visible
 			if v:IsA("Frame") and v ~= GameBar then
 				if v.Visible == false then
+					Minimize.Rotation = 90
 					v.Visible = true
 					GameBar.Visible = Nigga
 				else
+					Minimize.Rotation = 0
 					v.Visible = false
 					GameBar.Visible = false
 				end
