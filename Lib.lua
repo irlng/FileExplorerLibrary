@@ -106,13 +106,11 @@ function module.CreateWindow(LibName)
 	Minimize.AnchorPoint = Vector2.new(0.5, 0.5)
 	Minimize.BackgroundTransparency = 1.000
 	Minimize.BorderSizePixel = 0
-	Minimize.Position = UDim2.new(0.978800595, 0, 0.49999997, 0)
-	Minimize.Size = UDim2.new(0.0423987918, 0, 0.99999994, 0)
+	Minimize.Position = UDim2.new(0.978096783, 0, 0.517857134, 0)
+	Minimize.Size = UDim2.new(0.0438066497, 0, 1.03571427, 0)
 	Minimize.ZIndex = 0
-	Minimize.Image = "rbxassetid://3926307971"
-	Minimize.ImageRectOffset = Vector2.new(884, 284)
-	Minimize.ImageRectSize = Vector2.new(36, 36)
-
+	Minimize.Image = "http://www.roblox.com/asset/?id=6034818372"
+	
 	UIAspectRatioConstraint.Parent = Minimize
 	UIAspectRatioConstraint.AspectRatio = 1.002
 
@@ -523,9 +521,9 @@ function module.CreateWindow(LibName)
 	ImageLabel_2.Parent = GameID
 	ImageLabel_2.BackgroundTransparency = 1.000
 	ImageLabel_2.BorderSizePixel = 0
-	ImageLabel_2.Position = UDim2.new(-0.153752834, 0, 0.111111104, 0)
+	ImageLabel_2.Position = UDim2.new(-0.153846174, 0, 0.133333325, 0)
 	ImageLabel_2.Selectable = false
-	ImageLabel_2.Size = UDim2.new(0.134615391, 0, 1.39999998, 0)
+	ImageLabel_2.Size = UDim2.new(0.134615391, 0, 0.770299196, 0)
 	ImageLabel_2.AutoButtonColor = false
 	ImageLabel_2.Image = "http://www.roblox.com/asset/?id=6035053278"
 	ImageLabel_2.MouseButton1Click:Connect(function()
@@ -607,17 +605,67 @@ function module.CreateWindow(LibName)
 			end
 		end
 	end)
+	
+	Icon.MouseButton1Click:Connect(function()
+
+		ChangeFolder(GameFolder)
+
+		GameBar.Visible = true
+		for _, v in pairs(MainBar:GetChildren()) do
+			if v:IsA("ScrollingFrame") then
+				v.Visible = false
+			end
+		end
+	end)
+	
+	Tittle.MouseButton1Click:Connect(function()
+
+		ChangeFolder(GameFolder)
+
+		GameBar.Visible = true
+		for _, v in pairs(MainBar:GetChildren()) do
+			if v:IsA("ScrollingFrame") then
+				v.Visible = false
+			end
+		end
+	end)
+	
 
 	Dropdown.MouseButton1Click:Connect(function()
 		if Dropdown.Rotation == 90 then
-			Dropdown.Rotation = 0
+			TweeningService:Create(
+				Dropdown,
+				TweenInfo.new(
+					0.1,
+					Enum.EasingStyle.Quart,
+					Enum.EasingDirection.Out,
+					0,
+					false,
+					0
+				),
+				{Rotation = 0}
+			)
+			
 			for _, DrpDwn in pairs(SideBar:GetChildren()) do
 				if DrpDwn ~= GameFolder and DrpDwn:IsA("TextButton") then
 					DrpDwn.Visible = false
 				end
 			end
 		else
-			Dropdown.Rotation = 90
+			
+			TweeningService:Create(
+				Dropdown,
+				TweenInfo.new(
+					0.1,
+					Enum.EasingStyle.Quart,
+					Enum.EasingDirection.Out,
+					0,
+					false,
+					0
+				),
+				{Rotation = 90}
+			)
+			
 			for _, DrpDwn in pairs(SideBar:GetChildren()) do
 				if DrpDwn ~= GameFolder and DrpDwn:IsA("TextButton") then
 					DrpDwn.Visible = true
@@ -695,6 +743,11 @@ function module.CreateWindow(LibName)
 		end
 	end)
 	
+	---------------------
+	
+	function module.Notify()
+		
+	end
 	
 	
 	---------------------
