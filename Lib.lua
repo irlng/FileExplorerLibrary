@@ -1006,11 +1006,7 @@ function module.CreateWindow(LibName)
 			local function DoItBu()
 				if SelectedActions == Button then
 					SelectedActions = nil
-					local Succes, Messgae = pcall(callback)
-					
-					if not Succes and Messgae ~= nil then
-						warn(Messgae)
-					end
+					pcall(callback)
 				end
 				
 				ChangeActions(Button)
@@ -1165,11 +1161,7 @@ function module.CreateWindow(LibName)
 					Enabled = not Enabled
 					State.Text = tostring(Enabled)
 					SelectedActions = nil
-					local Succes, Messgae = pcall(callback)
-
-					if not Succes and Messgae ~= nil then
-						warn(Messgae)
-					end
+					pcall(callback, Enabled)
 				end
 				
 				ChangeActions(Toggle)
