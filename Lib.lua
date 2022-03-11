@@ -633,39 +633,14 @@ function module.CreateWindow(LibName)
 
 	Dropdown.MouseButton1Click:Connect(function()
 		if Dropdown.Rotation == 90 then
-			TweeningService:Create(
-				Dropdown,
-				TweenInfo.new(
-					0.1,
-					Enum.EasingStyle.Quart,
-					Enum.EasingDirection.Out,
-					0,
-					false,
-					0
-				),
-				{Rotation = 0}
-			)
-			
+			Dropdown.Rotation = 0
 			for _, DrpDwn in pairs(SideBar:GetChildren()) do
 				if DrpDwn ~= GameFolder and DrpDwn:IsA("TextButton") then
 					DrpDwn.Visible = false
 				end
 			end
-		elseif Dropdown.Rotation ~= 90 then
-		
-			TweeningService:Create(
-				Dropdown,
-				TweenInfo.new(
-					0.1,
-					Enum.EasingStyle.Quart,
-					Enum.EasingDirection.Out,
-					0,
-					false,
-					0
-				),
-				{Rotation = 90}
-			)
-			
+		else
+			Dropdown.Rotation = 90
 			for _, DrpDwn in pairs(SideBar:GetChildren()) do
 				if DrpDwn ~= GameFolder and DrpDwn:IsA("TextButton") then
 					DrpDwn.Visible = true
