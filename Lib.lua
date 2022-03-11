@@ -668,11 +668,11 @@ function module.CreateWindow(LibName)
 			local Nigga = GameBar.Visible
 			if v:IsA("Frame") and v ~= GameBar then
 				if v.Visible == false then
-					Minimize.Rotation = 90
+					Minimize.Rotation = 0
 					v.Visible = true
 					GameBar.Visible = Nigga
 				else
-					Minimize.Rotation = 0
+					Minimize.Rotation = 90
 					v.Visible = false
 					GameBar.Visible = false
 				end
