@@ -651,8 +651,8 @@ function module.CreateWindow(LibName)
 					DrpDwn.Visible = false
 				end
 			end
-		else
-			
+		elseif Dropdown.Rotation ~= 90 then
+		
 			TweeningService:Create(
 				Dropdown,
 				TweenInfo.new(
